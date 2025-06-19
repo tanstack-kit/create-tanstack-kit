@@ -1,0 +1,28 @@
+{
+  "name": "@ctk/root",
+  "author": {
+    "name": "undefined",
+    "email": "thomas.janhonen@fastmail.com"
+  },
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tanstack-kit/create-tanstack-kit.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "create-tanstack-kit"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "turbo format"
+  },
+  "devDependencies": {
+    "turbo": "~2.5.4",
+    "typescript": "~5.8.3"
+  },
+  "packageManager": "pnpm@10.11.0"
+}
