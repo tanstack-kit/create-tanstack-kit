@@ -88,6 +88,14 @@ cp /public/.env.e /public/.env
 pnpm --filter=public dev
 ```
 
+> To run the cli
+```shell
+pnpm --filter=create-tanstack-kit build
+
+bun lib/bin/index.js --help
+bun lib/bin/index.js
+```
+
 ### Deploy
 
 > **[?]**
