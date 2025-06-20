@@ -1,3 +1,5 @@
 packages:
-  - public/*
-  - lib/*
+  - public
+  - lib
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'

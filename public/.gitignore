@@ -1,0 +1,4 @@
+.vercel
+
+//we'll remove this when we introduce biome
+!.eslint*
