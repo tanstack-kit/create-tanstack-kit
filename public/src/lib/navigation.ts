@@ -16,9 +16,11 @@ export const navigation = [
   {
     title: 'Usage',
     links: [
+      { title: 'Base', href: '/documentation/default' },
       { title: 'Authentication', href: '/documentation/authentication' },
       { title: 'Analytic', href: '/documentation/analytic' },
-      { title: 'Zod', href: '/documentation/zod' },
+      { title: 'Lint', href: '/documentation/lint' },
+      { title: 'Ecosystem', href: '/documentation/ecosystem' },
     ],
   },
   {

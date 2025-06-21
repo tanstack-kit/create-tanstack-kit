@@ -1,8 +1,8 @@
 ---
-title: Zod
+title: Lint
 nextjs:
   metadata:
-    title: Zod
+    title: Lint
     description: ...
 ---
 
