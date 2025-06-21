@@ -196,7 +196,7 @@ export const cli = async(): Promise<Configuration> => {
       },
       extra: () => {
         return prompt.multiselect({
-          message: 'which analytic provider would you prefer?',
+          message: 'anything else?',
           options: [
             { value: 'query', label: 'TanStack Query'},
             { value: 'form', label: 'TanStack Form'},
