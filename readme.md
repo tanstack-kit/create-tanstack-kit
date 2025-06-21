@@ -11,7 +11,7 @@
 
 <div>
 
-[![license](https://img.shields.io/github/license/tanstack-kit/create-tanstack-kit.svg?style=flat-square)](LICENSE) [![Pull Request](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/tanstack-kit/create-tanstack-kit/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) [![code with love from helsinki 🇫🇮](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-thrivcompany-ff1414.svg?style=flat-square)](https://github.com/the-real-undefinedtea)
+[![license](https://img.shields.io/github/license/tanstack-kit/create-tanstack-kit.svg?style=flat-square)](LICENSE) [![Pull Request](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/tanstack-kit/create-tanstack-kit/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) [![code with love from helsinki 🇫🇮](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-tanstack-kit-ff1414.svg?style=flat-square)](https://github.com/tanstack-kit)
 
 </div>
 
