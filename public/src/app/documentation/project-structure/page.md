@@ -1,9 +1,9 @@
 ---
-title: How to contribute
+title: Project Structure
 nextjs:
   metadata:
-    title: How to contribute
-    description: Quidem magni aut exercitationem maxime rerum eos.
+    title: Project Structure
+    description: ...
 ---
 
 Quasi sapiente voluptates aut minima non doloribus similique quisquam. In quo expedita ipsum nostrum corrupti incidunt. Et aut eligendi ea perferendis.

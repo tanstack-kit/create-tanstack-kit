@@ -1,9 +1,9 @@
 ---
-title: Predicting user behavior
+title: Mono Repository
 nextjs:
   metadata:
-    title: Predicting user behavior
-    description: Quidem magni aut exercitationem maxime rerum eos.
+    title: Mono Repository
+    description: ...
 ---
 
 Quasi sapiente voluptates aut minima non doloribus similique quisquam. In quo expedita ipsum nostrum corrupti incidunt. Et aut eligendi ea perferendis.

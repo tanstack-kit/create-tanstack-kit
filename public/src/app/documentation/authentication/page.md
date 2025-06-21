@@ -1,9 +1,9 @@
 ---
-title: Predictive data generation
+title: Authentication
 nextjs:
   metadata:
-    title: Predictive data generation
-    description: Quidem magni aut exercitationem maxime rerum eos.
+    title: Authentication
+    description: ...
 ---
 
 Quasi sapiente voluptates aut minima non doloribus similique quisquam. In quo expedita ipsum nostrum corrupti incidunt. Et aut eligendi ea perferendis.

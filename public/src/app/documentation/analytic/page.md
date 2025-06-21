@@ -1,9 +1,9 @@
 ---
-title: Introdution to string theory
+title: Analytic
 nextjs:
   metadata:
-    title: Introdution to string theory
-    description: Quidem magni aut exercitationem maxime rerum eos.
+    title: Analytic
+    description: ...
 ---
 
 Quasi sapiente voluptates aut minima non doloribus similique quisquam. In quo expedita ipsum nostrum corrupti incidunt. Et aut eligendi ea perferendis.
