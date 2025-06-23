@@ -4,7 +4,8 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
 
-    "outDir": "bin",
+    "rootDir": "./src",
+    "outDir": "./bin",
     "declaration": true,
 
     "strict": true,
@@ -21,7 +22,12 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
 
-    "sourceMap": true
+    "sourceMap": true,
+
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src/**/*"]
+  "include": ["src"]
 }

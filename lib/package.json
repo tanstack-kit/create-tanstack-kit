@@ -16,8 +16,8 @@
   ],
   "version": "0.0.1",
   "type": "module",
-  "main": "bin/src/index.js",
-  "types": "bin/src/index.d.ts",
+  "main": "bin/index.js",
+  "types": "bin/index.d.ts",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "pnpm build",

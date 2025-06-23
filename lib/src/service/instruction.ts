@@ -1,9 +1,9 @@
-import { log } from '../helper/log.js'
+import { log } from '@/helper/log.js'
 
 import { outro } from '@clack/prompts'
 import chalk from 'chalk'
 
-import { type Configuration } from '../cli/index.js'
+import { type Configuration } from '@/cli/index.js'
 
 
 export const instruction = async(configuration: Configuration): Promise<void> => {

@@ -1,4 +1,4 @@
-import { log } from '../helper/log.js'
+import { log } from '@/helper/log.js'
 import ora from 'ora'
 
 import { type CLIFlag } from '../cli/index.js'

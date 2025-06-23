@@ -1,10 +1,10 @@
 import { program } from 'commander'
 import * as prompt from '@clack/prompts'
 
-import { getLocalVersion } from '../helper/version.js'
+import { getLocalVersion } from '@/helper/version.js'
 // import chalk from 'chalk'
 
-// import { log } from '../helper/log.js'
+// import { log } from '@//helper/log.js'
 
 export interface CLIFlag {
   git: boolean

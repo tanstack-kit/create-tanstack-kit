@@ -92,9 +92,9 @@ pnpm --filter=public dev
 ```shell
 pnpm --filter=create-tanstack-kit build
 
-bun lib/bin/src/index.js --help
-bun lib/bin/src/index.js meow
-bun lib/bin/src/index.js
+bun lib/bin/index.js --help
+bun lib/bin/index.js meow
+bun lib/bin/index.js
 ```
 
 ### Deploy

@@ -1,5 +1,5 @@
 import { note } from '@clack/prompts'
-import { log } from './log.js'
+import { log } from '@/helper/log.js'
 
 import pkg from '../../package.json' with { type: 'json' }
 
