@@ -1,10 +1,12 @@
 import { program } from 'commander'
 import * as prompt from '@clack/prompts'
+
+import { version } from '../helper/version.js'
 // import chalk from 'chalk'
 
-// import { log } from '../service/log.js'
+// import { log } from '../helper/log.js'
 
-interface CLIFlag {
+export interface CLIFlag {
   git: boolean
   commit: boolean
   install: boolean
@@ -24,10 +26,11 @@ interface CLIFlag {
 export interface Configuration {
   name: string
   flag: CLIFlag
+  pkg: 'pnpm' | 'bun' | 'npm'
 }
 
 const defaultConfiguration: Configuration = {
-  name: 'i make stuff',
+  name: '',
   flag: {
     git: false,
     commit: false,
@@ -43,7 +46,8 @@ const defaultConfiguration: Configuration = {
     tailwind: true,
 
     extra: []
-  }
+  },
+  pkg: 'pnpm'
 }
 
 export const cli = async(): Promise<Configuration> => {
@@ -108,17 +112,58 @@ export const cli = async(): Promise<Configuration> => {
       configuration.flag.extra
     )
     //version
-    .version('0.0.1', '-v, --version')
+    .version(version(), '-v, --version')
 
   program.parse()
+
+  const project_ = program.args[0]
+  if(project_) {
+    configuration.name = project_
+  }
+
+  // const tmp = program.opts()
+  // if(tmp) {
+  //   return {
+  //     name: configuration.name,
+  //     flag: {
+  //       git: tmp.git,
+  //       commit: tmp.commit,
+  //       install: tmp.install,
+
+  //       language: tmp.language,
+  //       importAlias: tmp.importAlias,
+  //       lint: tmp.lint,
+
+  //       authentication: tmp.authentication,
+  //       analytic: tmp.analytic,
+
+  //       tailwind: tmp.tailwind,
+
+  //       extra: tmp.extra
+  //     },
+  //     pkg: configuration.pkg
+  //   }
+  // }
 
   const project = await prompt.group(
     {
       name: () => {
         return prompt.text({
           message: 'what shall we call your project?',
-          defaultValue: ''
+          defaultValue: configuration.name,
+          initialValue: configuration.name
         })
+      },
+      pkg: () => {
+        return prompt.select({
+          message: 'what is your chosen package manager?',
+          options: [
+            { value: 'pnpm', label: 'pnpm'},
+            { value: 'bun', label: 'bun'},
+            { value: 'npm', label: 'npm'},
+          ] as const,
+          initialValue: 'pnpm'
+        }) as Promise<'pnpm' | 'bun' | 'npm'>
       },
       git: () => {
         return prompt.confirm({
@@ -134,9 +179,9 @@ export const cli = async(): Promise<Configuration> => {
           })
         }
       },
-      install: () => {
+      install: ({ results }) => {
         return prompt.confirm({
-          message: 'execute pnpm install?',
+          message: `execute ${results.pkg} install?`,
           initialValue: defaultConfiguration.flag.install
         })
       },
@@ -215,13 +260,14 @@ export const cli = async(): Promise<Configuration> => {
 
   //rly? surely not!
   const commit = project.commit as boolean | false
+  const install = project.install as boolean | false
 
   return {
     name: project.name,
     flag: {
       git: project.git,
       commit: commit,
-      install: project.install,
+      install: install,
 
       language: project.language,
       importAlias: project.importAlias,
@@ -233,6 +279,7 @@ export const cli = async(): Promise<Configuration> => {
       tailwind: project.tailwind,
 
       extra: project.extra
-    }
+    },
+    pkg: project.pkg
   }
 }

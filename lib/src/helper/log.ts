@@ -13,5 +13,12 @@ export const log = {
 
   success(...arg: unknown[]) {
     console.log(chalk.green(...arg))
-  }
+  },
+
+  visual(...arg: unknown[]) {
+    console.log(chalk.magenta(...arg))
+  },
+  mute(...arg: unknown[]) {
+    console.log(chalk.grey(...arg))
+  },
 }

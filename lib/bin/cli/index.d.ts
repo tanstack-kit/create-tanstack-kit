@@ -1,4 +1,4 @@
-interface CLIFlag {
+export interface CLIFlag {
     git: boolean;
     commit: boolean;
     install: boolean;
@@ -13,6 +13,6 @@ interface CLIFlag {
 export interface Configuration {
     name: string;
     flag: CLIFlag;
+    pkg: 'pnpm' | 'bun' | 'npm';
 }
 export declare const cli: () => Promise<Configuration>;
-export {};

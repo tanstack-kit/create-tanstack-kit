@@ -1,2 +1,2 @@
 import { type Configuration } from '../cli/index.js';
-export declare const instruction: (_configuration: Configuration) => Promise<void>;
+export declare const instruction: (configuration: Configuration) => Promise<void>;
