@@ -16,8 +16,8 @@
   ],
   "version": "0.0.1",
   "type": "module",
-  "main": "bin/index.js",
-  "types": "bin/index.d.ts",
+  "main": "bin/src/index.js",
+  "types": "bin/src/index.d.ts",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "pnpm build",
@@ -28,6 +28,7 @@
     "chalk": "^5.4.1",
     "@clack/prompts": "^0.11.0",
     "commander": "^14.0.0",
+    "gradient-string": "^3.0.0",
     "ora": "^8.2.0"
   },
   "devDependencies": {

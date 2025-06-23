@@ -6,3 +6,4 @@ export declare const log: {
     visual(...arg: unknown[]): void;
     mute(...arg: unknown[]): void;
 };
+export declare const welcome: () => void;

@@ -1,7 +1,7 @@
 import { cli } from './cli/index.js'
 
 import { fqpn } from './helper/fqpn.js'
-import { log } from './helper/log.js'
+import { log, welcome } from './helper/log.js'
 
 import { create } from './service/create.js'
 import { alias } from './service/alias.js'
@@ -10,7 +10,13 @@ import { lint } from './service/lint.js'
 import { git } from './service/git.js'
 import { instruction } from './service/instruction.js'
 
+import { isCurrent } from './helper/version.js'
+
 const main = async() => {
+  welcome()
+
+  isCurrent()
+
   const configuration = await cli()
 
   const fqpn_ = fqpn(configuration)
