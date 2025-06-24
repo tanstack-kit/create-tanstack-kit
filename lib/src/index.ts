@@ -12,7 +12,7 @@ import { instruction } from '@/service/instruction.js'
 
 import { isCurrent } from '@/helper/version.js'
 
-const main = async() => {
+const main = async () => {
   welcome()
 
   isCurrent()
@@ -22,20 +22,20 @@ const main = async() => {
   const fqpn_ = fqpn(configuration)
   await create(fqpn_, configuration.flag)
 
-  if(configuration.flag.importAlias !== '@') {
-    await alias(configuration.flag.importAlias)
+  if (configuration.flag.importAlias !== '@') {
+    await alias(fqpn_, configuration.flag.importAlias)
   }
 
-  if(configuration.flag.install) {
-    await install(configuration.pkg)
+  if (configuration.flag.install) {
+    await install(fqpn_, configuration.pkg)
 
-    if(configuration.flag.lint === 'biome') {
-      await lint()
+    if (configuration.flag.lint === 'biome') {
+      await lint(fqpn_)
     }
   }
 
-  if(configuration.flag.git) {
-    await git(configuration.flag.commit)
+  if (configuration.flag.git) {
+    await git(fqpn_, configuration.flag.commit)
   }
 
   await instruction(configuration)

@@ -2,16 +2,18 @@ import { program } from 'commander'
 import * as prompt from '@clack/prompts'
 
 import { getLocalVersion } from '@/helper/version.js'
-// import chalk from 'chalk'
+import { projectIsValid } from '@/helper/fqpn.js'
 
-// import { log } from '@//helper/log.js'
+import chalk from 'chalk'
+
+import { log } from '@//helper/log.js'
 
 export interface CLIFlag {
   git: boolean
   commit: boolean
   install: boolean
 
-  language: 'javascript' | 'typescript'
+  language?: 'javascript' | 'typescript'
   importAlias: string
   lint: 'none' | 'biome'
 
@@ -36,7 +38,6 @@ const defaultConfiguration: Configuration = {
     commit: false,
     install: false,
 
-    language: 'typescript',
     importAlias: '@',
     lint: 'biome',
 
@@ -45,71 +46,63 @@ const defaultConfiguration: Configuration = {
 
     tailwind: true,
 
-    extra: []
+    extra: [],
   },
-  pkg: 'pnpm'
+  pkg: 'pnpm',
 }
 
-export const cli = async(): Promise<Configuration> => {
+export const cli = async (): Promise<Configuration> => {
   const configuration = defaultConfiguration
 
   program
     .name('create-tanstack-kit')
     .description('a cli to make awesome stuff using tanstack')
-    .argument(
-      '[path]',
-      'what shall we call your project?'
-    )
+    .argument('[path]', 'what shall we call your project?')
     // cli option list
     .option(
       '--git',
       'weather or not the cli should initialise a git repository',
-      configuration.flag.git
+      configuration.flag.git,
     )
     .option(
       '--commit',
       'weather or not the cli should make an initial commit',
-      configuration.flag.commit
+      configuration.flag.commit,
     )
     .option(
       '--install',
       'weather or not the cli should install dependencies',
-      configuration.flag.install
-    )
-    .option(
-      '-s, --syntax [javascript|typescript]',
-      'the flavour of *script you prefer',
-      configuration.flag.language
+      configuration.flag.install,
     )
     .option(
       '-a, --alias [string]',
       'override the default import alias',
-      configuration.flag.importAlias
+      configuration.flag.importAlias,
     )
     .option(
       '-l, --lint [biome]',
       'which lint library (if any) to use',
-      configuration.flag.lint
+      configuration.flag.lint,
     )
     .option(
       '-i, --iam [supabase|clerk]',
       'which authentication library (if any) to use',
-      configuration.flag.authentication
+      configuration.flag.authentication,
     )
     .option(
       '-d, --data [posthog]',
       'which analytic library (if any) to use',
-      configuration.flag.analytic
+      configuration.flag.analytic,
     )
     .option(
       '-t, --tailwind [boolean]',
       'include tailwind',
-      configuration.flag.tailwind
+      configuration.flag.tailwind,
     )
     .option(
       '-e, --extra [query,form,table]',
       'include extra',
-      configuration.flag.extra
+      configuration.flag.extra,
     )
     //version
     .version(getLocalVersion(), '-v, --version')
@@ -117,7 +110,12 @@ export const cli = async(): Promise<Configuration> => {
   program.parse()
 
   const project_ = program.args[0]
-  if(project_) {
+  if (project_) {
+    if (!projectIsValid(project_)) {
+      log.error(`${project_} is not a valid path.`)
+      process.exit(1)
+    }
+
     configuration.name = project_
   }
 
@@ -151,49 +149,58 @@ export const cli = async(): Promise<Configuration> => {
         return prompt.text({
           message: 'what shall we call your project?',
           defaultValue: configuration.name,
-          initialValue: configuration.name
+          initialValue: configuration.name,
+          validate(value) {
+            if (!projectIsValid(value)) return `${value} is not a valid path.`
+          },
         })
       },
       pkg: () => {
         return prompt.select({
           message: 'what is your chosen package manager?',
           options: [
-            { value: 'pnpm', label: 'pnpm'},
-            { value: 'bun', label: 'bun'},
-            { value: 'npm', label: 'npm'},
+            { value: 'pnpm', label: 'pnpm' },
+            { value: 'bun', label: 'bun' },
+            { value: 'npm', label: 'npm' },
           ] as const,
-          initialValue: 'pnpm'
+          initialValue: 'pnpm',
         }) as Promise<'pnpm' | 'bun' | 'npm'>
       },
       git: () => {
         return prompt.confirm({
           message: 'initialise an empty git repository?',
-          initialValue: defaultConfiguration.flag.git
+          initialValue: defaultConfiguration.flag.git,
         })
       },
       commit: ({ results }) => {
         if (results.git) {
           return prompt.confirm({
             message: 'make initial commit?',
-            initialValue: defaultConfiguration.flag.commit
+            initialValue: defaultConfiguration.flag.commit,
           })
         }
       },
       install: ({ results }) => {
         return prompt.confirm({
           message: `execute ${results.pkg} install?`,
-          initialValue: defaultConfiguration.flag.install
+          initialValue: defaultConfiguration.flag.install,
         })
       },
       language: () => {
         return prompt.select({
           message: 'what is your chosen *script flavour?',
           options: [
-            { value: 'typescript', label: 'TypeScript'},
-            { value: 'javascript', label: 'JavaScript'},
+            { value: 'typescript', label: 'TypeScript' },
+            { value: 'javascript', label: 'JavaScript' },
           ] as const,
-          initialValue: 'typescript'
+          initialValue: 'typescript',
         }) as Promise<'typescript' | 'javascript'>
+      },
+      _: ({ results }) => {
+        if (results.language === 'javascript') {
+          prompt.note(chalk.yellow("🚧 wrong answer, we'll use typescript"))
+        }
+        return undefined
       },
       importAlias: () => {
         return prompt.text({
@@ -206,48 +213,48 @@ export const cli = async(): Promise<Configuration> => {
         return prompt.select({
           message: 'which lint tool would you prefer?',
           options: [
-            { value: 'none', label: 'none'},
-            { value: 'biome', label: 'biome'},
+            { value: 'none', label: 'none' },
+            { value: 'biome', label: 'biome' },
           ] as const,
-          initialValue: 'none'
+          initialValue: 'none',
         }) as Promise<'none' | 'biome'>
       },
       authentication: () => {
         return prompt.select({
           message: 'which authentication provider would you prefer?',
           options: [
-            { value: 'none', label: 'none'},
-            { value: 'supabase', label: 'supabase'},
-            { value: 'clerk', label: 'clerk'},
+            { value: 'none', label: 'none' },
+            { value: 'supabase', label: 'supabase' },
+            { value: 'clerk', label: 'clerk' },
           ] as const,
-          initialValue: 'none'
+          initialValue: 'none',
         }) as Promise<'none' | 'supabase' | 'clerk'>
       },
       analytic: () => {
         return prompt.select({
           message: 'which analytic provider would you prefer?',
           options: [
-            { value: 'none', label: 'none'},
-            { value: 'posthog', label: 'PostHog'},
+            { value: 'none', label: 'none' },
+            { value: 'posthog', label: 'PostHog' },
           ] as const,
-          initialValue: 'none'
+          initialValue: 'none',
         }) as Promise<'none' | 'posthog'>
       },
       tailwind: () => {
         return prompt.confirm({
           message: 'use tailwind?',
-          initialValue: defaultConfiguration.flag.tailwind
+          initialValue: defaultConfiguration.flag.tailwind,
         })
       },
       extra: () => {
         return prompt.multiselect({
           message: 'anything else?',
           options: [
-            { value: 'query', label: 'TanStack Query'},
-            { value: 'form', label: 'TanStack Form'},
-            { value: 'table', label: 'TanStack Table'},
+            { value: 'query', label: 'TanStack Query' },
+            { value: 'form', label: 'TanStack Form' },
+            { value: 'table', label: 'TanStack Table' },
           ],
-          required: false
+          required: false,
         })
       },
     },
@@ -258,18 +265,13 @@ export const cli = async(): Promise<Configuration> => {
     },
   )
 
-  //rly? surely not!
-  const commit = project.commit as boolean | false
-  const install = project.install as boolean | false
-
   return {
     name: project.name,
     flag: {
       git: project.git,
-      commit: commit,
-      install: install,
+      commit: project.commit as boolean | false,
+      install: project.install as boolean | false,
 
-      language: project.language,
       importAlias: project.importAlias,
       lint: project.lint,
 
@@ -278,8 +280,8 @@ export const cli = async(): Promise<Configuration> => {
 
       tailwind: project.tailwind,
 
-      extra: project.extra
+      extra: project.extra,
     },
-    pkg: project.pkg
+    pkg: project.pkg,
   }
 }

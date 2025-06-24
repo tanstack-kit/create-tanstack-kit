@@ -7,44 +7,51 @@ export const getLocalVersion = (): string => {
   return pkg.version
 }
 
-export const getRemoteVersion = async(): Promise<string | null> => {
+export const getRemoteVersion = async (): Promise<string | null> => {
   const url = 'https://registry.npmjs.org/create-tanstack-kit/latest'
 
   try {
     const res = await fetch(url)
 
-    if(!res.ok) {
+    if (!res.ok) {
       return null
     }
 
     const { version } = await res.json()
     return version
-  } catch(_err) {
+  } catch (_err) {
     return null
   }
 }
 
-export const isCurrent = async(): Promise<void> => {
+export const isCurrent = async (): Promise<void> => {
   try {
     const localVersion = getLocalVersion()
     const remoteVersion = await getRemoteVersion()
 
-    if(!localVersion || !remoteVersion) return
+    if (!localVersion || !remoteVersion) return
 
-    const [localMajor, localMinor, localPatch] = localVersion.split('.').map(Number)
-    const [remoteMajor, remoteMinor, remotePatch] = remoteVersion.split('.').map(Number)
+    const [localMajor, localMinor, localPatch] = localVersion
+      .split('.')
+      .map(Number)
+    const [remoteMajor, remoteMinor, remotePatch] = remoteVersion
+      .split('.')
+      .map(Number)
 
-    const hasUpdate = remoteMajor > localMajor ||
+    const hasUpdate =
+      remoteMajor > localMajor ||
       (remoteMajor === localMajor && remoteMinor > localMinor) ||
-      (remoteMajor === localMajor && remoteMinor === localMinor && remotePatch > localPatch)
+      (remoteMajor === localMajor &&
+        remoteMinor === localMinor &&
+        remotePatch > localPatch)
 
-    if(hasUpdate) {
+    if (hasUpdate) {
       note(
         `${log.warn(`local: ${localVersion} ⇥ remote: ${remoteVersion}`)}`,
-        '📦 update available'
+        '📦 update available',
       )
     }
-  } catch(_err) {
+  } catch (_err) {
     return
   }
 }
