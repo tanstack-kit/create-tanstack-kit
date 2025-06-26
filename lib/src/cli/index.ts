@@ -22,7 +22,7 @@ export interface CLIFlag {
 
   tailwind: boolean
 
-  extra: Array<'query' | 'form' | 'table'>
+  extra: Array<'query' | 'form'>
 }
 
 export interface Configuration {
@@ -100,7 +100,7 @@ export const cli = async (): Promise<Configuration> => {
       configuration.flag.tailwind,
     )
     .option(
-      '-e, --extra [query,form,table]',
+      '-e, --extra [query,form]',
       'include extra',
       configuration.flag.extra,
     )
@@ -252,7 +252,6 @@ export const cli = async (): Promise<Configuration> => {
           options: [
             { value: 'query', label: 'TanStack Query' },
             { value: 'form', label: 'TanStack Form' },
-            { value: 'table', label: 'TanStack Table' },
           ],
           required: false,
         })
