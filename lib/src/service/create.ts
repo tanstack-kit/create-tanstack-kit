@@ -3,12 +3,12 @@ import ora from 'ora'
 
 import type { CLIFlag } from '@/cli/index.js'
 
-import { join, resolve } from 'node:path'
-import { access, cp, readdir, rm } from 'node:fs/promises'
+import { join } from 'node:path'
+import { access, readdir, rm } from 'node:fs/promises'
 
-export const create = async (fqpn: string, _flag: CLIFlag): Promise<void> => {
-  const tmpPath = resolve(import.meta.dirname, '../../template/base')
+import { apply } from '@/helper/template.js'
 
+export const create = async (fqpn: string, flag: CLIFlag): Promise<void> => {
   const wait = ora('beep boop beep create project').start()
 
   try {
@@ -70,9 +70,21 @@ export const create = async (fqpn: string, _flag: CLIFlag): Promise<void> => {
 
   try {
     wait.start()
-    await cp(tmpPath, fqpn, {
-      recursive: true,
-    })
+    const partialList = [
+      flag.lint,
+      flag.analytic,
+
+      flag.tailwind ? 'tailwind' : null,
+
+      flag.authentication,
+
+      ...flag.extra
+    ].filter((item): item is string => item !== 'none' && item !== null)
+
+    await apply(fqpn, partialList, wait)
+    // await cp(tmpPath, fqpn, {
+    //   recursive: true,
+    // })
     wait.succeed('yay')
   } catch (_err) {
     wait.fail('uuups')

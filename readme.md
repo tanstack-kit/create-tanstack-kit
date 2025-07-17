@@ -4,14 +4,13 @@
 
 <div>:steam_locomotive::train::train::train:</div>
 
-
 <div>
   <a href="https://github.com/tanstack-kit/create-tanstack-kit/issues/new?assignees=&labels=bug&template=01_BUG_REPORT.md&title=bug%3A+">Report a Issue</a> · <a href="https://github.com/tanstack-kit/create-tanstack-kit/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a> . <a href="https://github.com/tanstack-kit/create-tanstack-kit/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+">Ask a Question</a>
 </div>
 
 <div>
 
-[![license](https://img.shields.io/github/license/tanstack-kit/create-tanstack-kit.svg?style=flat-square)](LICENSE) [![Pull Request](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/tanstack-kit/create-tanstack-kit/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) [![code with love from helsinki 🇫🇮](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-tanstack-kit-ff1414.svg?style=flat-square)](https://github.com/tanstack-kit)
+[![license](https://img.shields.io/github/license/tanstack-kit/create-tanstack-kit.svg?style=flat-square)](LICENSE)[![Pull Request](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/tanstack-kit/create-tanstack-kit/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)[![code with love by tanstack-kit](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-tanstack-kit-ff1414.svg?style=flat-square)](https://github.com/tanstack-kit)
 
 </div>
 

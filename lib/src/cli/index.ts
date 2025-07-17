@@ -225,7 +225,7 @@ export const cli = async (): Promise<Configuration> => {
           options: [
             { value: 'none', label: 'none' },
             { value: 'supabase', label: 'supabase' },
-            { value: 'clerk', label: 'clerk' },
+            { value: 'clerk', label: 'clerk'},
           ] as const,
           initialValue: 'none',
         }) as Promise<'none' | 'supabase' | 'clerk'>

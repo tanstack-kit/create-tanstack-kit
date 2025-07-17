@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "format": "biome format --write .",
+    "lint": "biome lint --write --unsafe ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.5"
+  }
+}
